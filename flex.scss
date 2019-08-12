@@ -1,0 +1,146 @@
+/*
+ * flex，兼容IE10
+*/
+
+@mixin display($value) {
+  @if $value == flex {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+  } @else if $value == inline-flex {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+  } @else {
+    display: $value
+  }
+}
+
+@mixin flex($value) {
+	-ms-flex: $value;
+	-webkit-flex: $value;
+	flex: $value;
+}
+
+@mixin flex-justify-content($value) {
+ 
+  @if $value == space-between {
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else if $value == flex-start {
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-pack: end;
+  } @else if $value == center {
+    -ms-flex-pack: center;
+  }
+	-webkit-justify-content: $value;
+	justify-content: $value;
+}
+
+@mixin flex-align-content($value) {
+ 
+  @if $value == space-between {
+    -ms-flex-line-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-line-pack: distribute;
+  } @else if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else if $value == center or $value == stretch {
+    -ms-flex-line-pack: $value;
+  }
+	-webkit-align-content: $value;
+	align-content: $value;
+}
+
+@mixin flex-align-items($value) {
+ 
+  @if $value == flex-start {
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-align: end;
+  } @else if $value == center or $value == baseline or $value == stretch {
+    -ms-flex-align: $value;
+  }
+	-webkit-align-items: $value;
+	align-items: $value;
+}
+
+@mixin flex-align-self($value) {
+ 
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else if $value == auto or $value == center or $value == baseline or $value == stretch {
+    -ms-flex-item-align: $value;
+  }
+	-webkit-align-self: $value;
+	align-self: $value;
+}
+
+@mixin flex-direction($value) {
+	-ms-flex-direction: $value;
+	-webkit-flex-direction: $value;
+	flex-direction: $value;
+}
+
+@mixin flex-order($value) {
+	-ms-flex-order: $value;
+	-webkit-order: $value;
+	order: $value;
+}
+
+@mixin flex-wrap($value) {
+ 
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else if $value == wrap or $value == wrap-reverse {
+    -ms-flex-wrap: $value;
+  }
+	-webkit-flex-wrap: $value;
+	flex-wrap: $value;
+}
+
+// ----------------
+// 常用flex布局
+// 命名规则：flex-[flex-justify-content]-[flex-align-items]
+
+%flex-start-start {
+  @include display(flex);
+  @include flex-justify-content(flex-start);
+  @include flex-align-items(flex-start);
+}
+
+%flex-start-center {
+  @include display(flex);
+  @include flex-justify-content(flex-start);
+  @include flex-align-items(center);
+}
+
+%flex-center-start {
+  @extend %flex-start-start;
+  @include flex-justify-content(center);
+}
+
+%flex-center-center {
+  @extend %flex-start-center;
+  @include flex-justify-content(center);
+}
+
+%flex-between-start {
+  @extend %flex-center-start;
+  @include flex-justify-content(space-between);
+}
+
+%flex-between-center {
+  @extend %flex-start-center;
+  @include flex-justify-content(space-between);
+}
+
+%flex-end-center {
+  @extend %flex-start-center;
+  @include flex-justify-content(flex-end);
+}
+
